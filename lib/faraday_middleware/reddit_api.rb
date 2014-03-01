@@ -1,7 +1,12 @@
-require "faraday_middleware/reddit_api/version"
+require 'faraday'
 
 module FaradayMiddleware
   module RedditApi
-    # Your code goes here...
+    autoload :Modhash, 'faraday_middleware/reddit_api/request/modhash'
+
+    if Faraday.respond_to? :register_middleware
+      Faraday.register_middleware :request,
+        :modhash    => lambda { Modhash }
+    end
   end
 end
