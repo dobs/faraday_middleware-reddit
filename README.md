@@ -1,6 +1,6 @@
 # FaradayMiddleware::RedditApi
 
-A collection of middleware for use with the Reddit API.
+A collection of Faraday middleware for use with the Reddit API.
 
 ## Installation
 
