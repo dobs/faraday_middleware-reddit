@@ -1,6 +1,6 @@
 # FaradayMiddleware::RedditApi
 
-TODO: Write a gem description
+A collection of middleware for use with the Reddit API.
 
 ## Installation
 
@@ -27,3 +27,10 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+Contributors
+------------
+
+  * Maintainer: [Daniel O'Brien](http://github.com/dobs)
+
+This project is copyright 2014 by its contributors, licensed under [Apache License 2.0](https://github.com/dobs/faraday_middleware-reddit_api/blob/master/LICENSE).
