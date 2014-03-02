@@ -26,9 +26,11 @@ Like `faraday_middleware`, `faraday_middleware-reddit_api` requires a `json` lib
 
 `faraday_middleware-reddit_api` currently provides the following middleware:
 
-  * `:reddit_authentication`: Automatic authentication based on a username, password or pre-generated cookie.
-  * `:reddit_modhash`: Automatic modhash handling.
-  * `:reddit_rate_limit`: Automatic rate limiting based on reddit's `x-ratelimit` headers. Accepts a `strategy` proc to override default linear strategy.
+| Middleware | Description |
+| --- | --- |
+| `:reddit_authentication` | Automatic authentication based on a username, password or pre-generated cookie. |
+| `:reddit_modhash` | Automatic modhash handling. |
+| `:reddit_rate_limit` | Automatic rate limiting based on reddit's `x-ratelimit` headers. Accepts a `strategy` proc to override default linear strategy. |
 
 ## Examples
 
