@@ -16,11 +16,7 @@ module FaradayMiddleware::Reddit
       if env[:method].to_s == 'get'
         env[:url].path += '.json' unless env[:url].path.end_with?('.json')
       elsif env[:method].to_s == 'post'
-        if env[:body].is_a? Hash
-          env[:body][:api_type] = 'json'
-        else
-          env[:body] = [env[:body], 'api_type=json'].compact.join('&')
-        end
+        env[:body] = [env[:body], 'api_type=json'].compact.join('&')
       end
 
       @app.call(env)
