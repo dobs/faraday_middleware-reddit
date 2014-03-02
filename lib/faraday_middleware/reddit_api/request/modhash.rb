@@ -19,17 +19,24 @@ module FaradayMiddleware::RedditApi
     end
 
     def call(env)
-      env[:request_headers]['X-Modhash'] = @modhash unless @modhash.nil?
+      @modhash = env[:modhash] if env[:modhash]
+      env[:request_headers]['X-Modhash'] = @modhash if @modhash
       @app.call(env).on_complete do |env|
         update_modhash(env)
       end
     end
 
-    def update_modhash(env)
-      unless env[:body].strip.empty?
-        body = ::JSON.parse env[:body]
-        @modhash = body['data']['modhash'] if body['data'] && body['data']['modhash']
+    def from_json(data)
+      if data.is_a?(String) && !data.strip.empty? && data.include?('modhash')
+        JSON.parse(data)
+      else
+        data
       end
+    end
+
+    def update_modhash(env)
+      body = from_json(env[:body])
+      @modhash = body['data']['modhash'] if body['data']
     end
   end
 end
