@@ -46,6 +46,8 @@ An example Farday client might look like:
 
       faraday.response :logger
 
+      # Middleware affecting both requests and responses. Better if it sits lower
+      # in the stack.
       faraday.use  :reddit_rate_limit
       faraday.use  :reddit_modhash
 
