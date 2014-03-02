@@ -16,9 +16,32 @@ Or install it yourself as:
 
     $ gem install faraday_middleware-reddit_api
 
+## Requirements
+
+`faraday` and `faraday_middleware` are currently gemspec dependencies.
+
+Like `faraday_middleware`, `faraday\_middleware-reddit\_api` requires a `json` library. Ruby versions prior to 1.9 will need to have one installed.
+
 ## Usage
 
-TODO: Write usage instructions here
+`faraday\_middleware-reddit\_api` currently provides the following middleware:
+
+  * `:modhash`: Automatic modhash handling.
+  * `:reddit_authentication`: Automatic authentication based on a username, password or pre-generated cookie.
+
+## Examples
+
+An example Farday client might look like:
+
+    require 'faraday\_middleware/reddit\_api'
+
+    conn = Faraday.new(:url => 'http://www.reddit.com', :headers => {'User-Agent' => 'faraday_middleware-reddit_api example (v 0.0.1)'}) do |faraday|
+      faraday.request  :reddit_authentication, 'yourusername', 'yourpassword'
+      faraday.request  :modhash
+      faraday.request  :url_encoded
+      faraday.response :logger
+      faraday.adapter  Faraday.default_adapter
+    end
 
 ## Contributing
 
