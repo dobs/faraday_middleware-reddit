@@ -1,11 +1,14 @@
 require 'faraday'
 
 module FaradayMiddleware::RedditApi
+  # Request middleware that automatically handles user login.
   #
-
-  AUTH_URL = 'https://ssl.reddit.com/post/login'.freeze
-
+  # Requires that either a `user` and `password` are provided or a
+  # pre-generated `cookie`. Performs an additional login request when no
+  # valid login cookie is available.
   class Authentication < Faraday::Middleware
+    AUTH_URL = 'https://ssl.reddit.com/post/login'.freeze
+
     dependency do
       require 'json' unless defined?(::JSON)
     end
