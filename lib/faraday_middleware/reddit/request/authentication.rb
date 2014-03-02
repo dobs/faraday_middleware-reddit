@@ -1,6 +1,6 @@
 require 'faraday'
 
-module FaradayMiddleware::RedditApi
+module FaradayMiddleware::Reddit
   # Request middleware that automatically handles user login.
   #
   # Requires that either a `user` and `password` are provided or a

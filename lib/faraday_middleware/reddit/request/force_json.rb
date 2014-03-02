@@ -1,6 +1,6 @@
 require 'faraday'
 
-module FaradayMiddleware::RedditApi
+module FaradayMiddleware::Reddit
   # Request middleware to force reddit to provide JSON responses when
   # available.
   #

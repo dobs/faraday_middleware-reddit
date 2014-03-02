@@ -1,4 +1,4 @@
-# FaradayMiddleware::RedditApi
+# FaradayMiddleware::Reddit
 
 A collection of Faraday middleware for use with the Reddit API.
 
@@ -6,7 +6,7 @@ A collection of Faraday middleware for use with the Reddit API.
 
 Add this line to your application's Gemfile:
 
-    gem 'faraday_middleware-reddit_api'
+    gem 'faraday_middleware-reddit'
 
 And then execute:
 
@@ -14,17 +14,17 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install faraday_middleware-reddit_api
+    $ gem install faraday_middleware-reddit
 
 ## Requirements
 
 `faraday` and `faraday_middleware` are currently gemspec dependencies.
 
-Like `faraday_middleware`, `faraday_middleware-reddit_api` requires a `json` library. Ruby versions prior to 1.9 will need to have one installed.
+Like `faraday_middleware`, `faraday_middleware-reddit` requires a `json` library. Ruby versions prior to 1.9 will need to have one installed.
 
 ## Usage
 
-`faraday_middleware-reddit_api` currently provides the following middleware:
+`faraday_middleware-reddit` currently provides the following middleware:
 
 | Middleware | Type | Description |
 | --- | --- | --- |
@@ -37,9 +37,9 @@ Like `faraday_middleware`, `faraday_middleware-reddit_api` requires a `json` lib
 
 An example Farday client might look like:
 
-    require 'faraday_middleware/reddit_api'
+    require 'faraday_middleware/reddit'
 
-    conn = Faraday.new(:url => 'http://www.reddit.com', :headers => {'User-Agent' => 'faraday_middleware-reddit_api example (v 0.0.1)'}) do |faraday|
+    conn = Faraday.new(:url => 'http://www.reddit.com', :headers => {'User-Agent' => 'faraday_middleware-reddit example (v 0.0.1)'}) do |faraday|
       faraday.request  :url_encoded
       faraday.request  :reddit_authentication, 'yourusername', 'yourpassword'
       faraday.request  :reddit_force_json
@@ -65,4 +65,4 @@ Contributors
 
   * Maintainer: [Daniel O'Brien](http://github.com/dobs)
 
-This project is copyright 2014 by its contributors, licensed under [Apache License 2.0](https://github.com/dobs/faraday_middleware-reddit_api/blob/master/LICENSE).
+This project is copyright 2014 by its contributors, licensed under [Apache License 2.0](https://github.com/dobs/faraday_middleware-reddit/blob/master/LICENSE).

@@ -1,13 +1,13 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'faraday_middleware/reddit_api/version'
+require 'faraday_middleware/reddit/version'
 
 Gem::Specification.new do |spec|
   spec.add_dependency 'faraday'
 
-  spec.name          = "faraday_middleware-reddit_api"
-  spec.version       = FaradayMiddleware::RedditApi::VERSION
+  spec.name          = "faraday_middleware-reddit"
+  spec.version       = FaradayMiddleware::Reddit::VERSION
   spec.authors       = ["Daniel O'Brien"]
   spec.email         = ["dan@dobs.org"]
   spec.description   = %q{A collection of Faraday middleware for use with the Reddit API.}

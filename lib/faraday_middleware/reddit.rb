@@ -1,11 +1,11 @@
 require 'faraday'
 
 module FaradayMiddleware
-  module RedditApi
-    autoload :Authentication, 'faraday_middleware/reddit_api/request/authentication'
-    autoload :ForceJson,      'faraday_middleware/reddit_api/request/force_json'
-    autoload :Modhash,        'faraday_middleware/reddit_api/use/modhash'
-    autoload :RateLimit,      'faraday_middleware/reddit_api/use/rate_limit'
+  module Reddit
+    autoload :Authentication, 'faraday_middleware/reddit/request/authentication'
+    autoload :ForceJson,      'faraday_middleware/reddit/request/force_json'
+    autoload :Modhash,        'faraday_middleware/reddit/use/modhash'
+    autoload :RateLimit,      'faraday_middleware/reddit/use/rate_limit'
 
     if Faraday.respond_to? :register_middleware
       Faraday.register_middleware :request,

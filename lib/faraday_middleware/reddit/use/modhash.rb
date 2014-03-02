@@ -1,6 +1,6 @@
 require 'faraday'
 
-module FaradayMiddleware::RedditApi
+module FaradayMiddleware::Reddit
   # Middleware that keeps track of and sets modhash-related HTTP headers.
   #
   # Reddit uses modhashes as a form of XSS protection and requires them for
