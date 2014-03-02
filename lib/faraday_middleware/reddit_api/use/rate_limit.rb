@@ -1,7 +1,7 @@
 require 'faraday'
 
 module FaradayMiddleware::RedditApi
-  # Request middleware for automatic rate limiting.
+  # Middleware for automatic rate limiting.
   #
   # Logs reddit's ratelimit HTTP headers and applies a caching strategy
   # based on them. The default strategy is to block for x-ratelimit-reset /

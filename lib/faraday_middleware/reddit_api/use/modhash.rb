@@ -1,8 +1,7 @@
 require 'faraday'
 
 module FaradayMiddleware::RedditApi
-  # Request middleware that keeps track of and sets modhash-related HTTP
-  # headers.
+  # Middleware that keeps track of and sets modhash-related HTTP headers.
   #
   # Reddit uses modhashes as a form of XSS protection and requires them for
   # most POST and PUT requests. Modhashes are currently provided in response

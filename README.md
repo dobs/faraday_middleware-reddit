@@ -26,12 +26,12 @@ Like `faraday_middleware`, `faraday_middleware-reddit_api` requires a `json` lib
 
 `faraday_middleware-reddit_api` currently provides the following middleware:
 
-| Middleware | Description |
-| --- | --- |
-| `:reddit_authentication` | Authentication based on a username, password or pre-generated cookie. |
-| `:reddit_force_json` | Coerces reddit into returnign JSON for GET and POST requests. |
-| `:reddit_modhash` | Automatic modhash handling. |
-| `:reddit_rate_limit` | Rate limiting based on reddit's `x-ratelimit` headers. Accepts a `strategy` proc to override default linear strategy. |
+| Middleware | Type | Description |
+| --- | --- | --- |
+| `:reddit_authentication` | request | Authentication based on a username, password or pre-generated cookie. |
+| `:reddit_force_json` | request | Coerces reddit into returnign JSON for GET and POST requests. |
+| `:reddit_modhash` | use | Automatic modhash handling. |
+| `:reddit_rate_limit` | use | Rate limiting based on reddit's `x-ratelimit` headers. Accepts a `strategy` proc to override default linear strategy. |
 
 ## Examples
 
@@ -43,9 +43,12 @@ An example Farday client might look like:
       faraday.request  :url_encoded
       faraday.request  :reddit_authentication, 'yourusername', 'yourpassword'
       faraday.request  :reddit_force_json
-      faraday.request  :reddit_rate_limit
-      faraday.request  :reddit_modhash
+
       faraday.response :logger
+
+      faraday.use  :reddit_rate_limit
+      faraday.use  :reddit_modhash
+
       faraday.adapter  Faraday.default_adapter
     end
 
