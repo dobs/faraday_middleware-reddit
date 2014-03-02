@@ -5,7 +5,7 @@ module FaradayMiddleware::RedditApi
 
   AUTH_URL = 'https://ssl.reddit.com/post/login'.freeze
 
-  class RedditAuthentication < Faraday::Middleware
+  class Authentication < Faraday::Middleware
     dependency do
       require 'json' unless defined?(::JSON)
     end
