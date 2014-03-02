@@ -10,12 +10,17 @@ module FaradayMiddleware::RedditApi
       require 'json' unless defined?(::JSON)
     end
 
-    def initialize(app, user, password, remember = true, cookie = nil)
+    def initialize(app, options)
       super(app)
-      @user    = user
-      @passwd  = password
-      @rem     = remember
-      @cookie  = cookie
+      @options = options
+      @user    = @options[:user]
+      @passwd  = @options[:password]
+      @rem     = @options[:remember]
+      @cookie  = @options[:cookie]
+
+      unless (@options[:user] && @options[:password]) || @options[:cookie]
+        raise ArgumentError, 'Either `user` and `password` or `cookie` need to be provided as options to the :reddit_authentication middleware'
+      end
     end
 
     def call(env)
