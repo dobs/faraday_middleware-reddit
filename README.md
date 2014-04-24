@@ -41,7 +41,7 @@ An example Farday client might look like:
 
     conn = Faraday.new(:url => 'http://www.reddit.com', :headers => {'User-Agent' => 'faraday_middleware-reddit example (v 0.0.1)'}) do |faraday|
       faraday.request  :url_encoded
-      faraday.request  :reddit_authentication, 'yourusername', 'yourpassword'
+      faraday.request  :reddit_authentication, user: 'yourusername', password: 'yourpassword'
       faraday.request  :reddit_force_json
 
       faraday.response :logger

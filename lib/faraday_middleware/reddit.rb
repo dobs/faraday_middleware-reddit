@@ -7,11 +7,11 @@ module FaradayMiddleware
     autoload :Modhash,        'faraday_middleware/reddit/use/modhash'
     autoload :RateLimit,      'faraday_middleware/reddit/use/rate_limit'
 
-    if Faraday.respond_to? :register_middleware
-      Faraday.register_middleware :request,
+    if Faraday::Middleware.respond_to? :register_middleware
+      Faraday::Request.register_middleware \
         :reddit_authentication => lambda { Authentication },
         :reddit_force_json     => lambda { ForceJson }
-      Faraday.register_middleware \
+      Faraday::Middleware.register_middleware \
         :reddit_modhash        => lambda { Modhash },
         :reddit_rate_limit     => lambda { RateLimit }
     end
