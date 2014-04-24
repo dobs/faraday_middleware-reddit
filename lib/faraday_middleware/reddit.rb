@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'faraday'
 
 module FaradayMiddleware
@@ -9,11 +11,11 @@ module FaradayMiddleware
 
     if Faraday::Middleware.respond_to? :register_middleware
       Faraday::Request.register_middleware \
-        :reddit_authentication => lambda { Authentication }
+        reddit_authentication: -> { Authentication }
       Faraday::Middleware.register_middleware \
-        :reddit_force_json     => lambda { ForceJson },
-        :reddit_modhash        => lambda { Modhash },
-        :reddit_rate_limit     => lambda { RateLimit }
+        reddit_force_json: -> { ForceJson },
+        reddit_modhash: -> { Modhash },
+        reddit_rate_limit: -> { RateLimit }
     end
   end
 end
