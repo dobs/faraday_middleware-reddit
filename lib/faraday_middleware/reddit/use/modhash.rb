@@ -39,6 +39,8 @@ module FaradayMiddleware
       def update_modhash(env)
         body = from_json(env[:body])
         @modhash = body['data']['modhash'] if body['data']
+      rescue JSON::JSONError
+        # Ignore -- modhash can be acquired lazily.
       end
     end
   end
