@@ -18,8 +18,6 @@ module FaradayMiddleware
       def call(env)
         if env[:method].to_s == 'get'
           env[:url].path += '.json' unless env[:url].path.end_with?('.json')
-        elsif env[:method].to_s == 'post'
-          env[:body] = [env[:body], 'api_type=json'].compact.join('&')
         end
 
         @app.call(env)
