@@ -10,11 +10,9 @@ module FaradayMiddleware
     # pre-generated `cookie`. Performs an additional login request when no
     # valid login cookie is available.
     class Authentication < Faraday::Middleware
-      AUTH_URL = 'https://ssl.reddit.com/post/login'.freeze
+      include ModhashHelpers
 
-      dependency do
-        require 'json' unless defined?(::JSON)
-      end
+      AUTH_URL = 'https://ssl.reddit.com/api/login'.freeze
 
       def initialize(app, options)
         super(app)
@@ -37,6 +35,7 @@ module FaradayMiddleware
           apply_cookie(env)
         else
           authenticate(env)
+          apply_cookie(env)
         end
 
         @app.call(env)
@@ -56,6 +55,7 @@ module FaradayMiddleware
 
       def authenticate(env)
         response = Faraday.post AUTH_URL, user: @user, passwd: @passwd, rem: @rem, api_type: 'json'
+        env[:modhash] = extract_modhash(response.env)
         @cookie = response.headers['set-cookie']
       end
     end

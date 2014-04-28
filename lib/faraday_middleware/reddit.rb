@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'faraday'
+require 'faraday_middleware/reddit/helpers/modhash'
 
 module FaradayMiddleware
   module Reddit

@@ -10,9 +10,7 @@ module FaradayMiddleware
     # most POST and PUT requests. Modhashes are currently provided in response
     # to listing GET requests.
     class Modhash < Faraday::Middleware
-      dependency do
-        require 'json' unless defined?(::JSON)
-      end
+      include ModhashHelpers
 
       def initialize(app, options = nil)
         super(app)
@@ -28,17 +26,8 @@ module FaradayMiddleware
         end
       end
 
-      def from_json(data)
-        if data.is_a?(String) && !data.strip.empty? && data.include?('modhash')
-          JSON.parse(data)
-        else
-          data
-        end
-      end
-
       def update_modhash(env)
-        body = from_json(env[:body])
-        @modhash = body['data']['modhash'] if body['data']
+        @modhash = extract_modhash(env)
       rescue JSON::JSONError
         # Ignore -- modhash can be acquired lazily.
       end
