@@ -8,7 +8,7 @@ module FaradayMiddleware
     #
     # Logs reddit's ratelimit HTTP headers and applies a caching strategy
     # based on them. The default strategy is to block for x-ratelimit-reset /
-    # x-ratelimit_remaining.
+    # x-ratelimit-remaining.
     class RateLimit < Faraday::Middleware
       def initialize(app, options = nil)
         super(app)
