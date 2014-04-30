@@ -19,6 +19,9 @@ module FaradayMiddleware
       end
 
       def call(env)
+        # Modhash unnecessary when using OAuth.
+        return @app.call(env) if env[:request_headers]['Authorization']
+
         @modhash = env[:modhash] if env[:modhash]
         env[:request_headers]['X-Modhash'] = @modhash if @modhash
         @app.call(env).on_complete do |response_env|
