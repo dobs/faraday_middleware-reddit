@@ -23,12 +23,7 @@ module FaradayMiddleware
       end
 
       def call(env)
-        if @ratelimit_remaining <= 0 || env[:status] == 429
-          sleep(@ratelimit_reset)
-        else
-          @strategy.call
-        end
-
+        @strategy.call
         @app.call(env).on_complete { |response_env| on_complete_callback(response_env) }
       end
 
@@ -37,6 +32,8 @@ module FaradayMiddleware
         @ratelimit_used      = env[:response_headers]['x-ratelimit-used'].to_i
         @ratelimit_reset     = env[:response_headers]['x-ratelimit-reset'].to_i
         @ratelimit_cap       = @ratelimit_remaining + @ratelimit_used
+
+        sleep(@ratelimit_reset) if @ratelimit_remaining == 0 || env[:status] == 429
       end
 
       def linear_strategy
