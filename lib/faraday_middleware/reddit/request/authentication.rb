@@ -12,7 +12,9 @@ module FaradayMiddleware
     class Authentication < Faraday::Middleware
       include ModhashHelpers
 
-      AUTH_URL = 'https://ssl.reddit.com/api/login'.freeze
+      AUTH_DOMAIN = 'https://ssl.reddit.com'.freeze
+      AUTH_PATH   = "/api/login".freeze
+      AUTH_URL    = "#{AUTH_DOMAIN}#{AUTH_PATH}"
 
       def initialize(app, options)
         super(app)
@@ -54,9 +56,18 @@ module FaradayMiddleware
       end
 
       def authenticate(env)
-        response = Faraday.post AUTH_URL, user: @user, passwd: @passwd, rem: @rem, api_type: 'json'
+        response = connection(env).post AUTH_PATH, user: @user, passwd: @passwd, rem: @rem, api_type: 'json'
         env[:modhash] = extract_modhash(response.env)
         @cookie = response.headers['set-cookie']
+      end
+
+      def connection(env)
+        Faraday.new(url: AUTH_DOMAIN, headers: env['request_headers']) do |faraday|
+          faraday.request  :url_encoded
+          faraday.request  :retry, max: 5, interval: 2, exceptions: FaradayMiddleware::Reddit::RETRIABLE_ERRORS
+          faraday.response :reddit_raise_error
+          faraday.adapter  Faraday.default_adapter
+        end
       end
     end
   end
