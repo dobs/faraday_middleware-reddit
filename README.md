@@ -2,6 +2,8 @@
 
 A collection of Faraday middleware for use with the Reddit API.
 
+This project is the backbone for [reddit-base](https://github.com/dobs/reddit-base). If you're building a client from scratch or just want to get up and running quickly you might want to check it out instead.
+
 ## Installation
 
 Add this line to your application's Gemfile:
