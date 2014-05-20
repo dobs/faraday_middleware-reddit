@@ -38,23 +38,25 @@ Like `faraday_middleware`, `faraday_middleware-reddit` requires a `json` library
 
 An example Farday client might look like:
 
-    require 'faraday_middleware/reddit'
+```ruby
+require 'faraday_middleware/reddit'
 
-    conn = Faraday.new(url: 'http://www.reddit.com', headers: {'User-Agent' => 'faraday_middleware-reddit example (v 0.0.1)'}) do |faraday|
-      faraday.request  :url_encoded
-      faraday.request  :reddit_authentication, user: 'yourusername', password: 'yourpassword'
-      faraday.request  :retry, max: 2, interval: 2, exceptions: FaradayMiddleware::Reddit::RETRIABLE_ERRORS
+conn = Faraday.new(url: 'http://www.reddit.com', headers: {'User-Agent' => 'faraday_middleware-reddit example (v 0.0.1)'}) do |faraday|
+  faraday.request  :url_encoded
+  faraday.request  :reddit_authentication, user: 'yourusername', password: 'yourpassword'
+  faraday.request  :retry, max: 2, interval: 2, exceptions: FaradayMiddleware::Reddit::RETRIABLE_ERRORS
 
-      faraday.response :logger
-      faraday.response :follow_redirects
-      faraday.response :reddit_raise_error
+  faraday.response :logger
+  faraday.response :follow_redirects
+  faraday.response :reddit_raise_error
 
-      faraday.use  :reddit_force_json
-      faraday.use  :reddit_rate_limit
-      faraday.use  :reddit_modhash
+  faraday.use  :reddit_force_json
+  faraday.use  :reddit_rate_limit
+  faraday.use  :reddit_modhash
 
-      faraday.adapter  Faraday.default_adapter
-    end
+  faraday.adapter  Faraday.default_adapter
+end
+```
 
 ## Contributing
 
