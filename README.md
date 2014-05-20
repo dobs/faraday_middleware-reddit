@@ -29,8 +29,9 @@ Like `faraday_middleware`, `faraday_middleware-reddit` requires a `json` library
 | Middleware | Type | Description |
 | --- | --- | --- |
 | `:reddit_authentication` | request | Authentication based on a username, password or pre-generated cookie. |
-| `:reddit_force_json` | request | Coerces reddit into returnign JSON for GET and POST requests. |
+| `:reddit_force_json` | use | Coerces reddit into returnign JSON for GET and POST requests. |
 | `:reddit_modhash` | use | Automatic modhash handling. |
+| `:reddit_raise_error` | response | Raises errors for common reddit error cases. |
 | `:reddit_rate_limit` | use | Rate limiting based on reddit's `x-ratelimit` headers. Accepts a `strategy` proc to override default linear strategy. |
 
 ## Examples
@@ -42,9 +43,11 @@ An example Farday client might look like:
     conn = Faraday.new(url: 'http://www.reddit.com', headers: {'User-Agent' => 'faraday_middleware-reddit example (v 0.0.1)'}) do |faraday|
       faraday.request  :url_encoded
       faraday.request  :reddit_authentication, user: 'yourusername', password: 'yourpassword'
+      faraday.request  :retry, max: 2, interval: 2, exceptions: FaradayMiddleware::Reddit::RETRIABLE_ERRORS
 
       faraday.response :logger
       faraday.response :follow_redirects
+      faraday.response :reddit_raise_error
 
       faraday.use  :reddit_force_json
       faraday.use  :reddit_rate_limit
