@@ -30,7 +30,8 @@ module FaradayMiddleware
       end
 
       def update_modhash(env)
-        @modhash = extract_modhash(env)
+        modhash = extract_modhash(env)
+        @modhash = modhash if modhash
       rescue JSON::JSONError
         # Ignore -- modhash can be acquired lazily.
       end

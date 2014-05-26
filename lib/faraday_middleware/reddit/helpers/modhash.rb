@@ -14,8 +14,8 @@ module FaradayMiddleware
 
         body = env[:body]
         body = JSON.parse(body) if body.is_a?(String) && !body.strip.empty?
-        body = body['json'] if body['json']
-        body['data']['modhash'] if body['data']
+        body = body['json'] if body.is_a?(Hash) && body['json']
+        body['data']['modhash'] if body.is_a?(Hash) && body['data']
       end
     end
   end
