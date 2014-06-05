@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dan@dobs.org"]
   spec.description   = %q{A collection of Faraday middleware for use with the Reddit API.}
   spec.summary       = %q{A collection of Faraday middleware for use with the Reddit API.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/dobs/faraday_middleware-reddit"
   spec.licenses       = ['Apache 2.0']
 
   spec.files         = `git ls-files`.split($/)
